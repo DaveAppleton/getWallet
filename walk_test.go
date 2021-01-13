@@ -20,3 +20,9 @@ func TestWalk(t *testing.T) {
 	}
 	t.Fail()
 }
+
+func TestMode(t *testing.T) {
+	str := newOrOld()
+	fmt.Println(str)
+	t.Fail()
+}

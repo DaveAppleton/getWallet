@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -91,8 +92,8 @@ func getWallet() string {
 		t := prompt.Input(">", completer)
 		fi, err := os.Lstat(t)
 		if err != nil {
-			log.Println(err)
-			os.Exit(1)
+			fmt.Println(err)
+			continue
 		}
 		log.Println(t)
 		if fi.IsDir() {
@@ -101,4 +102,24 @@ func getWallet() string {
 		}
 		return t
 	}
+}
+
+func completer2(d prompt.Document) []prompt.Suggest {
+	s := []prompt.Suggest{
+		{Text: "new", Description: "Create a new wallet in current folder"},
+		{Text: "open", Description: "Open an existing wallet"},
+	}
+
+	p := prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+	return p
+}
+
+func newOrOld() (mode string) {
+	for {
+		mode = prompt.Input(">>", completer2)
+		if (mode == "new") || (mode == "old") {
+			return
+		}
+	}
+
 }

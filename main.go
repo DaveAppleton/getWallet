@@ -35,4 +35,7 @@ func main() {
 	}
 	t := getWallet()
 	fmt.Println(t)
+
+	mode := newOrOld()
+	fmt.Println(mode)
 }
